@@ -1,4 +1,4 @@
-const renderGifts = async () => {
+const renderBikeShops = async () => {
     
     const response = await fetch('/bikeshops')
     const data = await response.json()
@@ -34,7 +34,7 @@ const renderGifts = async () => {
             const link = document.createElement('a')
             link.textContent = 'Read More >'
             link.setAttribute('role', 'button')
-            link.href = `/gifts/${gift.id}`
+            link.href = `/bikeshops/${gift.id}`
             bottomContainer.appendChild(link)
 
             card.appendChild(topContainer)
@@ -51,20 +51,20 @@ const renderGifts = async () => {
 
 const renderGift = async () => {
     const requestedID = parseInt(window.location.pathname.split("/").pop()); 
-    const response = await fetch("/gifts"); 
+    const response = await fetch("/bikeshops"); 
     const data = await response.json(); 
     const giftContent = document.getElementById("gift-content"); 
     let gift; 
+    console.log("data:", data); 
     gift = data.find(gift => gift.id === requestedID);  
-
+    console.log("gift:", gift)
     if (gift) {
-        console.log(gift);
-        document.getElementById("image").src = gift.logo; 
+        console.log("LOOK HERE:",);
+        document.getElementById("image").src = `${gift.logo}`; 
         document.getElementById("name").textContent = gift.name;
-        document.getElementById("submittedBy").textContent = "Submitted by: " + gift.submittedBy;
+        document.getElementById("description").textContent = gift.missionStatement;
         document.getElementById("pricePoint").textContent = "Price: " + gift.website;
-        document.getElementById("audience").textContent = "Great for: " + gift.audience;
-        document.getElementById("description").textContent = gift.description;
+        document.getElementById("audience").textContent = "Great for: " + gift.bikes;
         document.title = `UnEarthed - ${gift.name}`; 
     } else {
         const message = document.createElement("h2"); 
@@ -73,10 +73,11 @@ const renderGift = async () => {
     }
 };
 
+renderGift(); 
+
 const requestedUrl = window.location.href.split("/").pop(); 
 if (requestedUrl) {
-    window.location.href = "../404.html";
+    renderGift(); 
 } else {
-    renderGifts();
+    renderBikeShops();
 };
-renderGift(); 

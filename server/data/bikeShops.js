@@ -1,4 +1,4 @@
-const bikeShopData = [
+const bikeShops = [
 
     {
         id: 1, 
@@ -66,4 +66,4 @@ const bikeShopData = [
     }
 ];
 
-export default bikeShopData;
+export default bikeShops; 
